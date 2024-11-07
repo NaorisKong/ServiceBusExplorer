@@ -104,6 +104,13 @@ namespace ServiceBusExplorer.Helpers
         private const string EventHubPath = "EventHubPath";
         private const string SqlExpression = "SqlExpression";
         private const string CorrelationId = "CorrelationId";
+        private const string MessageId = "MessageId";
+        private const string To = "To";
+        private const string ReplyTo = "ReplyTo";
+        private const string Label = "Label";
+        private const string SessionId = "SessionId";
+        private const string ReplyToSessionId = "ReplyToSessionId";
+        private const string ContentType = "ContentType";
         private const string MaxSizeInMegabytes = "MaxSizeInMegabytes";
         private const string ForwardTo = "ForwardTo";
         private const string Rights = "Rights";
@@ -1348,7 +1355,17 @@ namespace ServiceBusExplorer.Helpers
             }
             if (filter.Name == string.Format(NodeNameFormat, Namespace, CorrelationFilterEntity))
             {
-                ruleFilter = new CorrelationFilter(propertyValue[CorrelationId] as string);
+                ruleFilter = new CorrelationFilter()
+                {
+                    ContentType = !string.IsNullOrWhiteSpace(propertyValue[ContentType] as string) ? propertyValue[ContentType] as string : null,
+                    CorrelationId = !string.IsNullOrWhiteSpace(propertyValue[CorrelationId] as string) ? propertyValue[CorrelationId] as string : null,
+                    Label = !string.IsNullOrWhiteSpace(propertyValue[Label] as string) ? propertyValue[Label] as string : null,
+                    MessageId = !string.IsNullOrWhiteSpace(propertyValue[MessageId] as string) ? propertyValue[MessageId] as string : null,
+                    To = !string.IsNullOrWhiteSpace(propertyValue[To] as string) ? propertyValue[To] as string : null,
+                    ReplyTo = !string.IsNullOrWhiteSpace(propertyValue[ReplyTo] as string) ? propertyValue[ReplyTo] as string : null,
+                    ReplyToSessionId = !string.IsNullOrWhiteSpace(propertyValue[ReplyToSessionId] as string) ? propertyValue[ReplyToSessionId] as string : null,
+                    SessionId = !string.IsNullOrWhiteSpace(propertyValue[SessionId] as string) ? propertyValue[SessionId] as string : null,
+                };
             }
             if (ruleFilter != null)
             {
