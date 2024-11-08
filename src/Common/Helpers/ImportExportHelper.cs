@@ -37,6 +37,7 @@ using Microsoft.Azure.NotificationHubs;
 using ServiceBusExplorer.Utilities.Helpers;
 using Microsoft.ServiceBus;
 using Microsoft.ServiceBus.Messaging;
+using ServiceBusExplorer.Common.Helpers;
 
 #endregion
 
@@ -1357,14 +1358,14 @@ namespace ServiceBusExplorer.Helpers
             {
                 ruleFilter = new CorrelationFilter()
                 {
-                    ContentType = !string.IsNullOrWhiteSpace(propertyValue[ContentType] as string) ? propertyValue[ContentType] as string : null,
-                    CorrelationId = !string.IsNullOrWhiteSpace(propertyValue[CorrelationId] as string) ? propertyValue[CorrelationId] as string : null,
-                    Label = !string.IsNullOrWhiteSpace(propertyValue[Label] as string) ? propertyValue[Label] as string : null,
-                    MessageId = !string.IsNullOrWhiteSpace(propertyValue[MessageId] as string) ? propertyValue[MessageId] as string : null,
-                    To = !string.IsNullOrWhiteSpace(propertyValue[To] as string) ? propertyValue[To] as string : null,
-                    ReplyTo = !string.IsNullOrWhiteSpace(propertyValue[ReplyTo] as string) ? propertyValue[ReplyTo] as string : null,
-                    ReplyToSessionId = !string.IsNullOrWhiteSpace(propertyValue[ReplyToSessionId] as string) ? propertyValue[ReplyToSessionId] as string : null,
-                    SessionId = !string.IsNullOrWhiteSpace(propertyValue[SessionId] as string) ? propertyValue[SessionId] as string : null,
+                    ContentType = propertyValue.GetNullableStringValue(ContentType),
+                    CorrelationId = propertyValue.GetNullableStringValue(CorrelationId),
+                    Label = propertyValue.GetNullableStringValue(Label),
+                    MessageId = propertyValue.GetNullableStringValue(MessageId),
+                    To = propertyValue.GetNullableStringValue(To),
+                    ReplyTo = propertyValue.GetNullableStringValue(ReplyTo),
+                    ReplyToSessionId = propertyValue.GetNullableStringValue(ReplyToSessionId),
+                    SessionId = propertyValue.GetNullableStringValue(SessionId),
                 };
             }
             if (ruleFilter != null)
